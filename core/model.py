@@ -33,7 +33,8 @@ class Model():
 			if layer['type'] == 'dense':
 				self.model.add(Dense(neurons, activation=activation))
 			if layer['type'] == 'lstm':
-				self.model.add(LSTM(neurons, input_shape=(input_timesteps, input_dim), return_sequences=return_seq))
+				state_ful = layer['stateful'] if 'stateful' in layer else None
+				self.model.add(LSTM(neurons, input_shape=(input_timesteps, input_dim), return_sequences=return_seq, stateful=state_ful))
 			if layer['type'] == 'dropout':
 				self.model.add(Dropout(dropout_rate))
 
